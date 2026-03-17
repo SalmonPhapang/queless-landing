@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Beer, Utensils, Truck, ShieldCheck, Zap, CreditCard, Clock } from 'lucide-react';
+import { Smartphone, Beer, Utensils, ShieldCheck, Zap, CreditCard, Clock } from 'lucide-react';
 import { FeatureCard } from '../components/FeatureCard';
 import { StepCard } from '../components/StepCard';
 import { ComingSoonModal } from '../components/ComingSoonModal';
