@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Beer, Utensils, ShieldCheck, Zap, CreditCard, Clock } from 'lucide-react';
+import { Smartphone, Beer, Utensils, ShieldCheck, Zap, CreditCard, Clock, MapPin } from 'lucide-react';
 import { FeatureCard } from '../components/FeatureCard';
 import { StepCard } from '../components/StepCard';
 import { ComingSoonModal } from '../components/ComingSoonModal';
 
 export const Home: React.FC = () => {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
+  const ctaSectionRef = useRef<HTMLElement>(null);
 
   const googlePlayLink = "https://lxsvydiyzeavdqbjxkpp.supabase.co/storage/v1/object/public/releases/queless-arm64-release.apk";
+
+  const scrollToCTA = () => {
+    ctaSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const vaalSuburbs = [
+    "Vanderbijlpark", "Vereeniging", "Sasolburg", "Meyerton", 
+    "Sharpeville", "Sebokeng", "Boipatong", "Evaton",
+    "Three Rivers", "Arcon Park", "Falcon Ridge", "Bedworth Park"
+  ];
 
   return (
     <>
@@ -33,26 +44,11 @@ export const Home: React.FC = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button 
-                  onClick={() => setIsComingSoonOpen(true)}
-                  className="flex items-center justify-center gap-2 bg-black text-white px-8 py-3 rounded-2xl hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 shadow-xl"
+                  onClick={scrollToCTA}
+                  className="flex items-center justify-center gap-2 bg-primary text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-xl"
                 >
-                  <Smartphone size={24} />
-                  <div className="text-left">
-                    <div className="text-[10px] uppercase font-bold opacity-70">Coming soon to</div>
-                    <div className="text-lg font-bold leading-none">App Store</div>
-                  </div>
+                  Get the App
                 </button>
-                <a 
-                  href={googlePlayLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-black text-white px-8 py-3 rounded-2xl hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 shadow-xl"
-                >
-                  <div className="text-left">
-                    <div className="text-[10px] uppercase font-bold opacity-70">Download for</div>
-                    <div className="text-lg font-bold leading-none">Android APK</div>
-                  </div>
-                </a>
               </div>
             </motion.div>
 
@@ -145,6 +141,29 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Locations Section */}
+      <section id="locations" className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-extrabold mb-4">Now Serving the Vaal Triangle</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              We're rapidly expanding to bring the party to your doorstep across the Vaal.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {vaalSuburbs.map((suburb) => (
+              <div key={suburb} className="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl hover:bg-secondary/5 transition-colors border border-transparent hover:border-secondary/20">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-secondary shadow-sm">
+                  <MapPin size={20} />
+                </div>
+                <span className="font-semibold text-gray-700">{suburb}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Trust Badges / Stats Section */}
       <section className="py-12 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4">
@@ -174,7 +193,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-primary text-white relative overflow-hidden">
+      <section ref={ctaSectionRef} className="py-24 bg-primary text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full -ml-48 -mb-48 blur-3xl"></div>
         
