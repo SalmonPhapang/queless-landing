@@ -105,7 +105,7 @@ function AppContent() {
             <div>
               <h3 className="font-bold mb-4">Company</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><Link to="/" className="hover:text-white">About Us</Link></li>
+                <li><Link to="/about" className="hover:text-white">About Us</Link></li>
                 <li><Link to="/" className="hover:text-white">Careers</Link></li>
                 <li>
                   <button 
